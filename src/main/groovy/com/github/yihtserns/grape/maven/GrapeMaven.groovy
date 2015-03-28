@@ -22,6 +22,9 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.ConsoleHandler
+import java.util.logging.Level
+import java.util.logging.Logger
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 /**
@@ -30,6 +33,29 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
  * @author yihtserns
  */
 public class GrapeMaven implements GrapeEngine {
+
+    private static String[] LOGGER_NAMES = [
+        "org.jboss.shrinkwrap.resolver.impl.maven.logging.LogTransferListener",
+        "org.jboss.shrinkwrap.resolver.impl.maven.logging.LogRepositoryListener",
+        "org.jboss.shrinkwrap.resolver.impl.maven.logging.LogModelProblemCollector"
+    ]
+
+    public GrapeMaven() {
+        def reportDownloads = Boolean.getBoolean("groovy.grape.report.downloads")
+        if (reportDownloads) {
+            def consoleHandler = new ConsoleHandler()
+            consoleHandler.level = Level.FINEST
+
+            LOGGER_NAMES.each { name ->
+                def logger = Logger.getLogger(name)
+                logger.with {
+                    useParentHandlers = false
+                    level = Level.FINEST
+                    addHandler(consoleHandler)
+                }
+            }
+        }
+    }
 
     @Override
     public Object grab(String endorsedModule) {
