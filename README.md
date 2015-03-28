@@ -44,8 +44,8 @@ For this to happen, `grape-maven-<version>.jar` has to be loaded before `groovy-
 
 But if for some reason this doesn't work (different platform, etc) what you can do is to remove `groovy/grape/GrapeIvy.class` from `%GROOVY_HOME%/lib/groovy-<version>.jar` (which you'd first backup somewhere safe, of course).
 
-Completed features
-------------------
+Milestones
+----------
 - [x] Supports `@Grab("<group>:<module>:<version>")`
 - [x] Supports `groovy.grape.report.downloads` flag
 - [x] Allows Groovy Console (`groovyConsole.bat`) to start up
