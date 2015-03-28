@@ -25,7 +25,7 @@ Usage instruction
 -----------------
 1. Download the project (preferably tag) and build it
   - Requires Maven - but if you need this, you'd already have it ;)
-2. Drop the built jar into $GROOVY_HOME/lib/, together with these dependencies:
+2. Drop the built jar into `$GROOVY_HOME/lib/`, together with these dependencies:
   - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.1.1
   - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api-maven:2.1.1
   - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api:2.1.1
