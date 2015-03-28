@@ -45,6 +45,7 @@ public class GrapeMaven implements GrapeEngine {
         if (reportDownloads) {
             def consoleHandler = new ConsoleHandler()
             consoleHandler.level = Level.FINEST
+            consoleHandler.formatter = { logRecord -> logRecord.message + System.lineSeparator() }
 
             LOGGER_NAMES.each { name ->
                 def logger = Logger.getLogger(name)
