@@ -23,43 +23,10 @@ Breaks Groovy Console (groovyConsole.bat).
 
 Usage instruction
 -----------------
-1. Download the project (preferably tag) and build it
+1. Download the project (preferably tag), build it and drop the resulting jar into `$GROOVY_HOME/lib/`.
   - Requires Maven - but if you need this, you'd already have it ;)
-2. Drop the built jar into `$GROOVY_HOME/lib/`, together with these dependencies:
-  - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.1.1
-  - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api-maven:2.1.1
-  - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api:2.1.1
-  - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-spi-maven:2.1.1
-  - org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-spi:2.1.1
-  - org.eclipse.aether:aether-api:0.9.0.M2
-  - org.eclipse.aether:aether-impl:0.9.0.M2
-  - org.eclipse.aether:aether-spi:0.9.0.M2
-  - org.eclipse.aether:aether-util:0.9.0.M2
-  - org.eclipse.aether:aether-connector-wagon:0.9.0.M2
-  - org.apache.maven:maven-aether-provider:3.1.1
-  - org.apache.maven:maven-model:3.1.1
-  - org.apache.maven:maven-model-builder:3.1.1
-  - org.apache.maven:maven-repository-metadata:3.1.1
-  - org.apache.maven:maven-settings:3.1.1
-  - org.apache.maven:maven-settings-builder:3.1.1
-  - org.apache.maven:wagon:wagon-provider-api:2.6
-  - org.apache.maven:wagon:wagon-file:2.6
-  - org.apache.maven:wagon:wagon-http-lightweight:2.6
-  - org.apache.maven:wagon:wagon-http-shared:2.6
-  - org.codehaus.plexus:plexus-component-annotations:1.5.5
-  - org.codehaus.plexus:plexus-interpolation:1.19
-  - org.codehaus.plexus:plexus-utils:3.0.15
-  - org.sonatype.plexus:plexus-sec-dispatcher:1.3
-  - org.sonatype.plexus:plexus-cipher:1.4
-  - commons-lang:commons-lang:2.6
-  - commons-io:commons-io:2.2
-  - org.jsoup:jsoup:1.7.2
-```powershell
-# TIPS: Download these jars into C:/temp by running this in console:
-C:\> groovy https://raw.githubusercontent.com/yihtserns/scripts/master/deps.groovy --folder C:/temp --artifact org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.1.1
-```
-
-3. To check if it works, run any Groovy script that contains `@Grab("<group>:<module>:<version>")` with `groovy.grape.report.downloads` turned on, e.g.:
+3. Run `mvn dependency:copy-dependencies` on the project and copy all the jars in `target/dependency/` into `$GROOVY_HOME/lib/`.
+4. To check if it works, run any Groovy script that contains `@Grab("<group>:<module>:<version>")` with `groovy.grape.report.downloads` turned on, e.g.:
 ```powershell
 C:\> groovy -Dgroovy.grape.report.downloads=true MyScript.groovy
 ```
