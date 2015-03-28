@@ -4,7 +4,7 @@ Groovy GrapeEngine that uses Maven API directly.
 
 Motivation
 ----------
-Groovy's default GrapeEngine uses Apache Ivy.  If you are primarily using Apache Maven, this means having to keep two separate jar repositories.
+Groovy's default GrapeEngine uses Apache Ivy.  If you are primarily using Apache Maven, this means having to keep two separate jar repositories: `%USERPROFILE%/.groovy/grapes` and `%USERPROFILE%/.m2/repository`.
 
 Sure, Ivy can be asked to resolve from local Maven repository, but for anything not available in the latter, it is still going to download and store the jars into its own repository.  Also, anything that can be resolved from local Maven repository is going to be cached in its own repository as well.
 
