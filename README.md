@@ -19,7 +19,7 @@ Tested on
 
 Warning
 -------
-Breaks Groovy Console (groovyConsole.bat).
+~~Breaks Groovy Console (groovyConsole.bat).~~ (Fixed in version 0.0.2)
 
 Usage instruction
 -----------------

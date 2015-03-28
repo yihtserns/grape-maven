@@ -124,4 +124,13 @@ public class GrapeMaven implements GrapeEngine {
     public void addResolver(Map<String, Object> args) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    /**
+     * Hack to allow Groovy Console to start up.
+     *
+     * @see https://github.com/groovy/groovy-core/blob/GROOVY_2_3_2/subprojects/groovy-console/src/main/groovy/groovy/ui/ConsoleIvyPlugin.groovy#L41
+     */
+    def getIvyInstance() {
+        return [eventManager:[addIvyListener:{}]]
+    }
 }
