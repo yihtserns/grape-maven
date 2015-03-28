@@ -17,10 +17,6 @@ Tested on
 - Windows 8.1
 - Apache Maven 3.2.5's local repository
 
-Warning
--------
-~~Breaks Groovy Console (groovyConsole.bat).~~ (Fixed in version 0.0.2)
-
 Usage instruction
 -----------------
 1. Download the project (preferably tag), build it and drop the resulting jar into `$GROOVY_HOME/lib/`.
@@ -52,3 +48,4 @@ Completed features
 ------------------
 - [x] Supports `@Grab("<group>:<module>:<version>")`
 - [x] Supports `groovy.grape.report.downloads` flag
+- [x] Allows Groovy Console (`groovyConsole.bat`) to start up
