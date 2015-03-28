@@ -83,5 +83,5 @@ But if for some reason this doesn't work (different platform, etc) what you can 
 
 Completed features
 ------------------
-[x] Supports `@Grab("<group>:<module>:<version>")`
-[x] Supports `groovy.grape.report.downloads` flag
+- [x] Supports `@Grab("<group>:<module>:<version>")`
+- [x] Supports `groovy.grape.report.downloads` flag
