@@ -43,11 +43,15 @@ public class GrapeMaven implements GrapeEngine {
 
     @Override
     public Object grab(Map args, Map... dependencies) {
-        URLClassLoader classLoader = (URLClassLoader) args.get("classLoader");
+        URLClassLoader classLoader = args.get("classLoader");
         if (classLoader == null) {
             return null;
         }
-        File[] files = Maven.resolver().resolve(asArray(dependencies)).withTransitivity().asFile();
+
+        File[] files = Maven.resolver()
+            .resolve(toCanonicalForms(dependencies))
+            .withTransitivity()
+            .asFile();
 
         for (File file : files) {
             classLoader.addURL(file.toURI().toURL())
@@ -56,16 +60,17 @@ public class GrapeMaven implements GrapeEngine {
         return null;
     }
 
-    private String[] asArray(Map<String, String>[] deps) {
-        List<String> x = new ArrayList<String>();
+    private List<String> toCanonicalForms(Map<String, String>[] deps) {
+        List<String> canonicalForms = new ArrayList<String>();
         for (Map<String, String> dep : deps) {
             String group = dep.get("group");
             String module = dep.get("module");
             String version = dep.get("version");
-            x.add(group + ":" + module + ":" + version);
+
+            canonicalForms.add(group + ":" + module + ":" + version);
         }
 
-        return x.toArray(new String[x.size()]);
+        return canonicalForms;
     }
 
     @Override
