@@ -21,7 +21,7 @@ Usage instruction
 -----------------
 1. Download the project (preferably tag), build it and drop the resulting jar into `$GROOVY_HOME/lib/`.
   - Requires Maven - but if you need this, you'd already have it ;)
-3. Run `mvn dependency:copy-dependencies` on the project and copy all the jars from `target/dependency/` into `$GROOVY_HOME/lib/`.
+3. Run `mvn dependency:copy-dependencies -DexcludeScope=provided` on the project and copy all the jars from `target/dependency/` into `$GROOVY_HOME/lib/`.
 4. To check if it works, run any Groovy script that contains `@Grab("<group>:<module>:<version>")` with `groovy.grape.report.downloads` turned on, e.g.:
 ```powershell
 C:\> groovy -Dgroovy.grape.report.downloads=true MyScript.groovy
