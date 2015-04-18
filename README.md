@@ -48,4 +48,5 @@ Milestones
 ----------
 - [x] Supports `@Grab("<group>:<module>:<version>")`
 - [x] Supports `groovy.grape.report.downloads` flag
+- [x] Supports extension modules
 - [x] Allows Groovy Console (`groovyConsole.bat`) to start up
