@@ -19,10 +19,11 @@ Tested on
 
 Usage instruction
 -----------------
-1. Download the project (preferably tag), build it and drop the resulting jar into `$GROOVY_HOME/lib/`.
+1. Download the project (preferably tag).
+2. Run `mvn clean package assembly:single -DdescriptorId=jar-with-dependencies` on the project.
   - Requires Maven - but if you need this, you'd already have it ;)
-2. Run `mvn clean package assembly:single -DdescriptorId=jar-with-dependencies` on the project and copy `grape-maven-<version>-jar-with-dependencies.jar` into `$GROOVY_HOME/lib/`.
-3. To check if it works, run any Groovy script that contains `@Grab("<group>:<module>:<version>")` with `groovy.grape.report.downloads` turned on, e.g.:
+3. Copy the resulting `grape-maven-<version>-jar-with-dependencies.jar` into `$GROOVY_HOME/lib/`.
+4. To check if it works, run any Groovy script that contains `@Grab("<group>:<module>:<version>")` with `groovy.grape.report.downloads` turned on, e.g.:
 ```powershell
 C:\> groovy -Dgroovy.grape.report.downloads=true MyScript.groovy
 ```
