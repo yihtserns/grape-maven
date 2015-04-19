@@ -42,6 +42,8 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
  */
 public class GrapeMaven implements GrapeEngine {
 
+    private static final int DEFAULT_DEPTH = 3
+
     private static String[] LOGGER_NAMES = [
         "org.jboss.shrinkwrap.resolver.impl.maven.logging.LogTransferListener",
         "org.jboss.shrinkwrap.resolver.impl.maven.logging.LogRepositoryListener",
@@ -66,14 +68,26 @@ public class GrapeMaven implements GrapeEngine {
         }
     }
 
+    /**
+     * Copied from Groovy's GrapeIvy.
+     */
     @Override
     public Object grab(String endorsedModule) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return grab(
+            group: 'groovy.endorsed',
+            module: endorsedModule,
+            version: GroovySystem.version
+        )
     }
 
+    /**
+     * Copied from Groovy's GrapeIvy.
+     */
     @Override
     public Object grab(Map args) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        args.calleeDepth = args.calleeDepth ?: DEFAULT_DEPTH + 1
+
+        return grab(args, args)
     }
 
     @Override
@@ -81,7 +95,7 @@ public class GrapeMaven implements GrapeEngine {
         URLClassLoader loader = chooseClassLoader(
             classLoader: args.remove('classLoader'),
             refObject: args.remove('refObject'),
-            calleeDepth: args.calleeDepth ?: 3,
+            calleeDepth: args.calleeDepth ?: DEFAULT_DEPTH,
         )
 
         if (loader == null) {
