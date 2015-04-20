@@ -48,6 +48,7 @@ But if for some reason this doesn't work (different platform, etc) what you can 
 Milestones
 ----------
 - [x] Supports `@Grab("<group>:<module>:<version>")`
+- [x] Supports `Grape.grab([group: <group>, module: <module>, version: <version>])`
 - [x] Supports `groovy.grape.report.downloads` flag
 - [x] Supports extension modules
 - [x] Allows Groovy Console (`groovyConsole.bat`) to start up
