@@ -50,6 +50,11 @@ public class GrapeMaven implements GrapeEngine {
         "org.jboss.shrinkwrap.resolver.impl.maven.logging.LogModelProblemCollector"
     ]
 
+    /**
+     * To prevent them from being garbage collected.
+     */
+    def programmaticallyConfiguredLoggers = []
+
     public GrapeMaven() {
         def reportDownloads = Boolean.getBoolean("groovy.grape.report.downloads")
         if (reportDownloads) {
@@ -64,6 +69,8 @@ public class GrapeMaven implements GrapeEngine {
                     level = Level.FINEST
                     addHandler(consoleHandler)
                 }
+
+                programmaticallyConfiguredLoggers << logger
             }
         }
     }
