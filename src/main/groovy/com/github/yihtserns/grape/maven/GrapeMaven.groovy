@@ -50,6 +50,8 @@ public class GrapeMaven implements GrapeEngine {
         "org.jboss.shrinkwrap.resolver.impl.maven.logging.LogModelProblemCollector"
     ]
 
+    def classLoader2CanonicalDeps = new WeakHashMap<ClassLoader, Set<String>>()
+
     /**
      * To prevent them from being garbage collected.
      */
@@ -109,10 +111,12 @@ public class GrapeMaven implements GrapeEngine {
             return null;
         }
 
-        File[] files = Maven.resolver()
-        .resolve(toCanonicalForms(dependencies))
-        .withTransitivity()
-        .asFile();
+        // Take loaded jars into account to prevent loading multiple versions of the same jar
+        Set<String> toBeResolved = findLoadedDepsFor(loader) + toCanonicalForms(dependencies)
+        assert toBeResolved instanceof LinkedHashSet // Order is important to know which jar got loaded first
+
+        File[] files = Maven.resolver().resolve(toBeResolved).withTransitivity().asFile();
+        updateLoadedDepsFor(loader, toBeResolved)
 
         // 1. Register **all** dependencies in class loader first...
         for (File file : files) {
@@ -127,6 +131,20 @@ public class GrapeMaven implements GrapeEngine {
         }
 
         return null;
+    }
+
+    private Set<String> findLoadedDepsFor(ClassLoader loader) {
+        Set<String> loadedDeps = classLoader2CanonicalDeps.get(loader)
+
+        if (loadedDeps == null) {
+            return new LinkedHashSet<String>()
+        }
+
+        return loadedDeps
+    }
+
+    private void updateLoadedDepsFor(ClassLoader loader, Set<String> canonicalDeps) {
+        classLoader2CanonicalDeps.put(loader, canonicalDeps)
     }
 
     private List<String> toCanonicalForms(Map<String, String>[] deps) {
